@@ -1,9 +1,6 @@
 package com.ofd.model;
 
-import java.util.Date;
 import java.util.List;
-
-import org.hibernate.annotations.ManyToAny;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -12,8 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,36 +17,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "orders")
-public class Order {
+public class CartItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long order_id;
+	private long id;
 
 	@ManyToOne
-	private User customer;
-
 	@JsonIgnore
-	@ManyToOne
-	private Restaurant restaurant;
-
-	private long totalAmount;
-
-	private String orderStatus;
-
-	private Date createdAt;
+	private Cart cart;
 
 	@ManyToOne
-	private Address deliveryAddress;
+	private Food food;
 
-	@OneToMany
-	private List<OrderItem> items;
+	private int quantity;
 
-//	private Payment payments;
+	private List<String> ingredients;
 
-	private int totalItem;
-
-	private int totalPrice;
-
+	private long totalPrice;
 }
